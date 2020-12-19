@@ -1,0 +1,202 @@
+html,
+body,
+.containerx {
+    height: 100%;
+}
+
+.containerx {
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-style {
+    background-color: #ffffff;
+    background-image: url("./img/bg.png");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 110% 80%;
+    background-attachment: fixed;
+}
+
+@media only screen and (min-width: 576px) {
+    .bg-style {
+        background-color: #ffffff;
+        background-image: url("./img/bg.svg");
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: 100% 100%;
+        background-attachment: fixed;
+    }
+}
+
+.card-header {
+    background-color: #0059A9;
+    color: #fff;
+}
+
+.verify {
+    padding: 5px 20px;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    border-radius: 50px;
+    background-color: #0059A9;
+    color: #fff;
+    font-weight: 500;
+    display: block;
+    margin-top: 20px;
+    -webkit-appearance: button;
+}
+
+.verify:focus {
+    outline: none;
+}
+
+.card-footer {
+    /* text-align: center; */
+    background-color: #0059A9;
+    color: #fff;
+    /* font-size: 13px; */
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /* padding-top: 20px; */
+}
+
+.card-footer img {
+    max-height: 35px;
+    /* padding-right: 30px */
+}
+
+.input-design {
+    height: 35px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+    color: #808080;
+    background-color: transparent;
+    border: 0px;
+    border-bottom: 2px solid rgba(0, 89, 169, 1);
+    width: 80%;
+}
+
+input:focus {
+    outline: none;
+    /* width: 90%;
+    font-size: 22px;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    transition: all .2s ease; */
+    /* box-shadow: 0px 30px 20px -30px white; */
+}
+
+
+/* input {
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    transition: all .2s ease;
+} */
+
+
+/* This is to prevent autofill from overriding the existing input style */
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+.head-line {
+    color: rgba(0, 89, 169, 1);
+    font-size: 20px;
+    font-weight: bold;
+    width: 80%;
+    padding-bottom: 20px;
+    padding-left: 0px;
+    text-align: left;
+    margin-top: 100px;
+}
+
+
+/* 
+.card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+.card-body {
+    padding: 5px 10px;
+    margin: 0;
+} */
+
+.tick-icon img {
+    max-width: 200px;
+}
+
+.result_div .head {
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.5rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.result_div p {
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0em;
+    text-align: justify;
+}
+
+.footer-div {
+    background-color: #0059A9;
+    color: #fff;
+    /* font-size: 13px; */
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 0.7;
+}
+
+.footer-div p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.footer-div a {
+    margin-bottom: 20px;
+    display: block;
+    color: #fff;
+    /* text-decoration: none; */
+}
+
+.button-dive button {
+    padding: 10px;
+    color: #fff;
+    background-color: #0059A9;
+    border-radius: 5px;
+    max-width: 100%;
+    text-decoration: none;
+    outline: none;
+}
+
+.logo {
+    margin: 50px 0;
+}
+
+.logo img {
+    max-width: 300px;
+}
