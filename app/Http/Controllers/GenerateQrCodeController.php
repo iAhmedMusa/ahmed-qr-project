@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Response;
 use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
@@ -17,39 +19,84 @@ class GenerateQrCodeController extends Controller {
         return "This is Index QR-CODE";
     }
 
-    public function code() {
+    public function query( Request $request ) {
+        $data = $request->all();
+        print_r( $data );
+    }
 
-        for ( $i = 0; $i <= 10; $i++ ) {
-            $data = [
-                'code' => $this->generateCode(),
-            ];
+    public function SimpleUrlQRData() {
+        $items = [];
+        for ( $i = 0; $i < 100; $i++ ) {
+            $items[][] = $this->generateCode();
+            // $items[][] = 'https://panacea.live/livecheck/'. $this->generateCode();
         }
-        Info::create( $data );
-        // return QrCode::size( 200 )->format( 'svg' )->generate( $v );
 
+        $file = fopen( storage_path( 'RobinSir2/' . "url-qr-data.csv" ), "w" );
+
+        foreach ( $items as $line ) {
+            fputcsv( $file, $line );
+        }
+
+        fclose( $file );
+        return 'done with ' . $i . ' items';
+    }
+
+    public function excel() {
+
+        $items = [];
+        for ( $i = 0; $i < 100; $i++ ) {
+            $items[][] = 'https://panacea.live/livecheck/' . $this->generateCode();
+        }
+
+        $file = fopen( storage_path( 'RobinSir2/' . "url-qr-data.csv" ), "w" );
+
+        foreach ( $items as $line ) {
+            fputcsv( $file, $line );
+        }
+
+        fclose( $file );
+        return 'done with ' . $i . ' items';
+
+    }
+
+    public function kaka() {
+        for ( $i = 0; $i < 10; $i++ ) {
+            $code = $this->generateCode();
+            QrCode::size( 300 )->format( 'png' )->merge( '../public/img/renata.png', 0.3, true )->backgroundColor( 255, 255, 255 )->style( 'round', 0.5 )->margin( 1 )->errorCorrection( 'H' )->generate( 'https://panacea.live/livecheck/' . $code, storage_path( 'RobinSir2/' . $code . '.png' ) );
+
+            // $source = storage_path('RobinSir2/'. $code . '.png');
+            // $dest = '../storage/bmpQR/' . $code . '.bmp';
+            // $this->imageConvertion( $source, $dest );
+        }
+        $this->destroy();
+
+        $this->getFilename();
+
+        return 'QR Generated: ' . $i . ' items';
     }
 
     public function robin() {
-        for ( $i = 0; $i < 5; $i++ ) {
+        for ( $i = 0; $i < 100; $i++ ) {
             $code = $this->generateCode();
-            QrCode::size( 300 )->format('png')->merge('../public/img/renata.png', 0.3, true )->backgroundColor(255,255,255)->style('round', 0.5)->margin(1)->errorCorrection( 'H' )->generate( 'https://7a90e147548d.ngrok.io/robin2/'.$code, '../storage/pngQR/' . $code . '.png' );
+            QrCode::size( 300 )->format( 'png' )->merge( '../public/img/renata.png', 0.3, true )->backgroundColor( 255, 255, 255 )->style( 'round', 0.5 )->margin( 1 )->errorCorrection( 'H' )->generate( 'https://panacea.live/livecheck/' . $code, '../storage/pngQR/' . $code . '.png' );
             $source = '../storage/pngQR/' . $code . '.png';
             $dest = '../storage/bmpQR/' . $code . '.bmp';
             $this->imageConvertion( $source, $dest );
-            $this->destroy();
+            // $this->destroy();
         }
-        return 'done';
+        $this->destroy();
+        $this->getFilename();
+        return 'QR Generated: ' . $i . ' items';
     }
-    
-    public function robin2($code) {
+
+    public function robin2( $code ) {
         $data['code'] = $code;
-        return view('livecheckpro.index')->with($data);
+        return view( 'livecheckpro.index' )->with( $data );
         // return view('robin')->with($data);
     }
 
-    public function result()
-    {
-        return view('livecheckpro.result');
+    public function result() {
+        return view( 'livecheckpro.result' );
     }
 
     private function generateCode() {
@@ -73,7 +120,9 @@ class GenerateQrCodeController extends Controller {
     }
     public function simpleQrCode() {
 
-        return \QrCode::size( 300 )->generate( 'https://panacea.live/livecheck', '../storage/robinsir/simple.png' );
+        QrCode::size( 300 )->format( 'png' )->backgroundColor( 255, 255, 255 )->style( 'round', 0.5 )->margin( 1 )->errorCorrection( 'H' )->generate( 'https://panacea.live/livecheck/SGLVXWO', '../storage/robinsir/print/SGLVXWO.png' );
+
+        return 'done';
 
     }
 
@@ -119,7 +168,7 @@ class GenerateQrCodeController extends Controller {
 
     public function imageConvertion( $source, $dest ) {
 
-        $manager = new ImageManager( [ 'driver' => 'imagick' ] );
+        $manager = new ImageManager( ['driver' => 'imagick'] );
         $s = $source;
         $d = $dest;
         $test = $manager->make( $s )->save( $d );
@@ -132,5 +181,28 @@ class GenerateQrCodeController extends Controller {
                 unlink( $file ); // delete file
             }
         }
+    }
+
+    public function getFilename() {
+        $files = glob( storage_path( 'bmpQR/*.bmp' ) ); // get all file names
+        foreach ( $files as $file ) { // iterate files
+            if ( is_file( $file ) ) {
+                $x[][] = pathinfo( $file )["basename"]; // delete file
+            }
+        }
+        $file = fopen( storage_path( 'bmpQR/' . "bmpQR.csv" ), "w" );
+
+        foreach ( $x as $line ) {
+            fputcsv( $file, $line );
+        }
+
+        return fclose( $file );
+        // return 'done';
+
+    }
+
+    public function dir() {
+        Storage::makeDirectory( 'FjRobinx', 0777, true, true );
+        return Storage::allDirectories( '/' );
     }
 }
