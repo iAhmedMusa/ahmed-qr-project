@@ -12,9 +12,9 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
-# /storage/app/public/importedCsv/*.csv
+/storage/app/public/importedCsv/*.csv
 
-/storage/Ranata
+/storage/Renata/*
 /storage/robinsir
 /storage/RobinSir2
 /storage/stored
