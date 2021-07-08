@@ -11,3 +11,13 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+# /storage/app/public/importedCsv/*.csv
+
+/storage/Ranata
+/storage/robinsir
+/storage/RobinSir2
+/storage/stored
+/storage/untitled folder
+
+

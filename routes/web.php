@@ -2,23 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+Route::get('/','CsvToQr@index');
+Route::post('excelUpload', 'CsvToQr@csvImport');
+Route::get('makeqr/{name}', 'CsvToQr@makeqr');
+Route::get('exr', 'CsvToQr@fileName');
+Route::get('downloadZip/{name}', 'CsvToQr@downloadZipFile');
+Route::get('download', 'CsvToQr@downloadZip');
+Route::get('makeDir', 'CsvToQr@makeDir');
+
 
 // Route::get('/', function () {
 //     return 'Hey Bro';
 // });
-Route::get('/','GenerateQrCodeController@index');
+// Route::get('/','GenerateQrCodeController@index');
 Route::get('live','GenerateQrCodeController@livecheck');
-Route::get('excel','GenerateQrCodeController@excel');
+Route::get('csv-gen','GenerateQrCodeController@excel');
 Route::get('liveview','GenerateQrCodeController@liveview');
 Route::get('robin','GenerateQrCodeController@robin');
 Route::get('kaka','GenerateQrCodeController@kaka');
@@ -38,6 +37,8 @@ Route::get('echo', 'App\Http\Controllers\bangla@index');
 Route::get('robin2/{code}','GenerateQrCodeController@robin2')->where('code', '[0-9]+');
 Route::get('result', 'GenerateQrCodeController@result');
 Route::get('dir', 'GenerateQrCodeController@dir');
+Route::get('makeFolder/{name}', 'GenerateQrCodeController@makeFolder');
+Route::get('deleteFolder/{name}', 'GenerateQrCodeController@deleteFolder');
 
 Route::get('ahmed', function () {
     return view('ahmed');
@@ -47,4 +48,16 @@ Route::get('kisu/{name}', function ($name) {
         return "Hello: $name";
 });
 
+Route::get('read', 'GenerateQrCodeController@readFile');
+Route::get('emni', 'GenerateQrCodeController@emni');
+
 Route::get('query', 'GenerateQrCodeController@query');
+Route::get('excel', 'GenerateQrCodeController@test_page');
+
+
+// Route::get('excel-to-qr', 'GenerateQrCodeController@makeCsvToQr');
+// Route::post('/excelUpload', 'GenerateQrCodeController@csvImport');
+
+Route::get('fetch', 'Practice@index');
+Route::get('fetchapi', 'Practice@fetch');
+Route::post('fetchapi', 'Practice@store');
